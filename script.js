@@ -248,6 +248,8 @@ function getBook(id) {
 
 // //allows you to access properties of an object that might be null or undefined without causing an error. This allows for clean and concise code
 
+/*
+
 function getTotalReviewCount(book) {
   const goodread = book.reviews.goodreads?.reviewsCount ?? 0;
   const libraryanything = book.reviews.librarything?.reviewsCount ?? 0;
@@ -297,3 +299,70 @@ adventureBooks;
 const pages = books.reduce((sum, book) => sum + book.pages, 0);
 
 pages;
+
+// Sort Method
+//commonly used to sort an array of objects
+//NOTE sorted will mutate the original array which React HATES. Important to make a copy of the array before sorting
+const x = [3, 1, 45, 6];
+const sorted = x.slice().sort((a, b) => a - b);
+sorted;
+x;
+
+const sortedByPages = [...books].sort((a, b) => a.pages - b.pages);
+sortedByPages;
+
+//Immutable Arrays
+
+//1) Add a book object to array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  Author: "J.K. Rowling",
+};
+
+const booksAfterAddition = [...books, newBook];
+booksAfterAddition;
+
+//2) Delete a book object from Array
+const booksAfterDelete = booksAfterAddition.filter((book) => book.id !== 3);
+booksAfterDelete;
+
+//3) Update a book object in the Array
+
+const booksAfterUpdate = booksAfterDelete.map((book) =>
+  book.id === 1 ? { ...book, pages: 666 } : book
+);
+
+booksAfterUpdate;
+
+*/
+
+//Asynchronous Promises
+//using the concept of promise methods
+//in order to fetch data from an API we have fetch()
+//we fetch the data from the string it then needs to wait until the request is processed and then downloads the data
+//To accomplish this is we need to use .then()
+//It will fetch the data wait until it downloads then converts it to json obj format then will run the cl with the data
+
+/*
+fetch("https://jsonplaceholder.typicode.com/todos")
+  .then((res) => res.json())
+  .then((data) => console.log(data));
+
+console.log("Jonas");
+*/
+
+//using Async and Await which is Much cleaner and easier to work with
+
+//await forces JS to wait for the data to download before it moves on
+
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+  return data;
+}
+
+const todos = getTodos();
+console.log(todos);
+console.log("Jonas");
